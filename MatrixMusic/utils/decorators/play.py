@@ -21,6 +21,8 @@ from MatrixMusic.utils.database import (
     is_maintenance,
 )
 from MatrixMusic.utils.inline import botplaylist_markup
+from config import PLAYLIST_IMG_URL, adminlist
+from strings import get_string
 
 links = {}
 
@@ -84,7 +86,7 @@ def PlayWrapper(command):
                 else:
                     if message.from_user.id not in admins:
                         return await message.reply_text(_["play_4"])
-        if message.command[0][0] == "v" or message.command[0][0] == "ف":
+        if message.command[0][0] == "ف":
             video = True
         else:
             if "-v" in message.text:
@@ -112,7 +114,7 @@ def PlayWrapper(command):
                     return await message.reply_text(
                         _["call_2"].format(
                             app.mention, userbot.id, userbot.name, userbot.username
-                        ), reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text= "๏ الغاء حظر ๏", callback_data=f"unban_assistant")]])
+                        )
                     )
             except UserNotParticipant:
                 if chat_id in links:
